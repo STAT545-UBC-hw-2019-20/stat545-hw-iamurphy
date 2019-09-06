@@ -23,4 +23,4 @@ In the wise words of Dr. Seuss:
 
 Oh, and one last thing. I love the *Real Housewives* franchise. I currently watch Beverly Hills, New York, and Potomac. This is also the perfect time to insert the best quote ever:
 
-![](https://giphy.com/gifs/season-7-rhony-real-housewives-of-new-york-3ohzdGu4kGeeSUX7iw.gif)
+![](https://media.giphy.com/media/3ohzdGu4kGeeSUX7iw/giphy.gif)
