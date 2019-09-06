@@ -6,7 +6,7 @@ Welcome to my GitHub! I'm so glad you're here! You may be wondering what's going
 
 The assignments will be organized as follows:
 
-1. There will be an individual folder for each assignment. For example, Assignment 01 will be a folder labeled <span style="color:red">hw01 </span>.
+1. There will be an individual folder for each assignment. For example, Assignment 01 will be a folder labeled *hw01*.
 2. Within each folder, you will find the files associated with each assignment. This will depend on how many questions are involved within each assignment.
 
 ### About Me
@@ -20,3 +20,7 @@ Aside from school, I love watching Netflix, playing the guitar, shooting picture
 In the wise words of Dr. Seuss:
 
 > Oh, the places you'll go!
+
+Oh, and one last thing. I love the *Real Housewives* franchise. I currently watch Beverly Hills, New York, and Potomac. This is also the perfect time to insert the best quote ever:
+
+![](https://giphy.com/gifs/season-7-rhony-real-housewives-of-new-york-3ohzdGu4kGeeSUX7iw)
