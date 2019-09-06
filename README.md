@@ -1,6 +1,4 @@
-# README --- Ian Murphy
-
-## Welcome
+## Welcome!
 
 Welcome to my GitHub! I'm so glad you're here! You may be wondering what's going on here. Well, this repository exists so that I can submit my assignments for **STAT 545A**. All of my submissions will be in this repo! 
 
@@ -21,6 +19,6 @@ In the wise words of Dr. Seuss:
 
 > Oh, the places you'll go!
 
-Oh, and one last thing. I love the *Real Housewives* franchise. I currently watch Beverly Hills, New York, and Potomac. This is also the perfect time to insert the best GIF ever:
+Oh, and one last thing. I love the *Real Housewives* franchise, so this is the perfect time to insert the best GIF ever, courtesy of Ramona Singer:
 
 ![](https://media.giphy.com/media/A3IKIsvG1UjwA/giphy.gif)
