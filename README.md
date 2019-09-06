@@ -19,6 +19,6 @@ In the wise words of Dr. Seuss:
 
 > Oh, the places you'll go!
 
-Oh, and one last thing. I love the *Real Housewives* franchise, so this is the perfect time to insert the best GIF ever, courtesy of Ramona Singer:
+Oh, and one last thing. I love the *Real Housewives* franchise, so this is the perfect time to insert an amazing one-liner by LuAnn:
 
-![](https://media.giphy.com/media/A3IKIsvG1UjwA/giphy.gif)
+![](https://media.giphy.com/media/kftv9JnBTDkIM/giphy.gif)
