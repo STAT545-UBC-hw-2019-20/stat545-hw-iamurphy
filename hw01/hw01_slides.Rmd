@@ -1,0 +1,102 @@
+---
+title: "Exploring Gapminder"
+author: "Ian Murphy"
+date: '2019-09-09'
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Exploring Gapminder
+
+- In these slides, we are going to explore the dataset, gapminder, in R. This dataset contains information on the life expectancy by country from the years 1952 to 2007, divided into 5 year chunks. There is also information present on GDP and population, for each country.
+
+- Let's do some exploration and some summary statistics!
+
+- But first, make sure to import the dataset.
+
+```{r}
+library(gapminder)
+```
+
+## Exploration
+
+- Let's calculate some things to understand the dataset even more. Firstly, what is the average life expectancy for the entire world in 1952? Then, let's compare that to the average life expectancy of the world in 2007!
+
+```{r}
+g <- as.data.frame(gapminder) # Convert to dataframe
+old <- subset(g, g[,"year"] == 1952) # Subset 1952 data
+new <- subset(g, g[,"year"] == 2007) # Subset 2007 data
+
+mean(old$lifeExp, rm.NA=TRUE) # Output means
+mean(new$lifeExp, rm.NA=TRUE)
+```
+
+## Exploration cont'd
+
+- As we can see in the previous anaylsis. The average life expectancy around the world has dramatically increased. 
+- We can do a similar analysis with the average GDP in the world too!
+
+```{r}
+mean(old$gdpPercap, rm.NA=TRUE)
+mean(new$gdpPercap, rm.NA=TRUE)
+```
+
+Again, a dramatic increase, which is to be expected.
+
+## Population Growth
+
+- Finally, let's look at population growth. Which country has had the biggest _relative_ change in population? That is to say, which country has experience the most population growth between 1952 and 2007? 
+- Luckily, we've already subsetting our data frame into 1952 data and 2007 data. Then, we should just look at the percent change amongst all of those countries.
+
+
+```{r}
+# Begin by reducing our datasets to only country name 
+# and population value.
+old <- old[c("country", "pop")]
+new <- new[c("country", "pop")]
+
+# Rename the columns
+names(old)[names(old) == 'pop'] <- 'pop_1952'
+names(new)[names(new) == 'pop'] <- 'pop_2007'
+```
+
+## Continued
+```{r}
+# Merge the datasets
+combined <- merge(old,new)
+
+# Look at the combined dataframe to make sure it merged correctly.
+head(combined)
+
+# Everything looks okay...
+```
+## Continued
+```{r}
+# Calculate percent change.
+percent_change <- ((combined$pop_2007 - combined$pop_1952) * 100 
+                   / combined$pop_1952)
+
+# Add this as a new column to our datset
+combined["percent_change"] <- percent_change
+
+# Let's find the biggest and lowest percent change
+biggest <- combined[which.max(percent_change),]
+lowest <- combined[which.min(percent_change),]
+```
+
+## Continued
+```{r}
+# Print out the countries.
+biggest
+lowest
+
+```
+
+- Here we can see that Kuwait had the largest percent increase in population, whereas Bulgaria had the least increase.
+
+## Conclusion
+
+- This is just a brief overview of the Gapminder dataset. There is much more to discover about it! 
