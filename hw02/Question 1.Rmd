@@ -1,1 +1,70 @@
+---
+title: "Assignment 2 Question 1"
+author: "Ian Murphy"
+date: '2019-09-18'
+output: 
+  html_document:
+    keep_md: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Assignment 2 - Question 1
+## 1.1
+
+Let's import the gapminder dataset, dplyr, and tidyverse.
+```{r}
+library(gapminder)
+library(tidyverse)
+suppressPackageStartupMessages(library(tidyverse))
+```
+
+Let's use the filter() function to extract 3 countries in the 1970s. The three countries I will use are Canada, France, and Germany.
+
+```{r}
+new_gap <- gapminder %>% 
+            filter(country == "Canada" | 
+                  country == "France" | 
+                  country == "Germany") %>% 
+            filter(1969 < year & year <= 1980)
+```
+
+As you can see, we've extracted 3 countries during the 1970s, called "reduced_gap".
+
+## 1.2
+
+Let's use pipe operator to select country and gdpPercap from the "reduced_gap" in 1.1.
+
+```{r}
+new_gap %>% 
+  select(country, gdpPercap)
+```
+
+## 1.3
+
+Now we will filter gapminder to all entries that have experienced a drop in life expectancy. 
+
+## 1.4 
+
+We will filter gapminder so that it only shows the max GDP Per Capita of each country. We will group_by country, then we will make use of the slice() function, which will only keep the max value.
+
+```{r}
+gapminder %>% 
+  select(country, gdpPercap) %>% 
+  group_by(country) %>% 
+  slice(which.max(gdpPercap))
+```
+This produces the correct table.
+
+## 1.5 
+
+Produce a scatterplot of Canada's life expectancy vs. GDP per Cap, using ggplot2. That is to say, gdpPercap is on x axis, and lifeExp is on y axis. This shows us that as gdpPercap increases, so does Canadian lifeExp.
+
+```{r}
+gapminder %>% 
+  filter(country == "Canada") %>%
+  ggplot(aes(log(gdpPercap), lifeExp)) + geom_point(colour="blue")
+```
 
