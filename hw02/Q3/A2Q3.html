@@ -135,23 +135,7 @@ $(document).ready(function () {
 <p>We want to see if any of these variables are related. To do so, we will simply look at the scatterplots.</p>
 <p>The first one will be a scatterplot of Girth vs. Volume, which clearly shows a nice linear trend.</p>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>## ── Attaching packages ──────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
-<pre><code>## ✔ ggplot2 3.0.0     ✔ purrr   0.3.2
-## ✔ tibble  2.1.3     ✔ dplyr   0.8.3
-## ✔ tidyr   0.8.3     ✔ stringr 1.3.1
-## ✔ readr   1.3.1     ✔ forcats 0.4.0</code></pre>
-<pre><code>## Warning: package 'ggplot2' was built under R version 3.4.4</code></pre>
-<pre><code>## Warning: package 'tidyr' was built under R version 3.4.4</code></pre>
-<pre><code>## Warning: package 'readr' was built under R version 3.4.4</code></pre>
-<pre><code>## Warning: package 'purrr' was built under R version 3.4.4</code></pre>
-<pre><code>## Warning: package 'stringr' was built under R version 3.4.4</code></pre>
-<pre><code>## Warning: package 'forcats' was built under R version 3.4.4</code></pre>
-<pre><code>## ── Conflicts ─────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()</code></pre>
-<pre class="r"><code>suppressPackageStartupMessages(library(tidyverse))
-
-trees %&gt;% 
+<pre class="r"><code>trees %&gt;% 
   ggplot(aes(Girth, Volume)) + 
   geom_point(colour=&quot;green&quot;) + 
   ggtitle(&quot;Black Cheery Trees (Volume vs. Girth)&quot;)</code></pre>
