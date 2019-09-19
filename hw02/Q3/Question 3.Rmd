@@ -19,8 +19,8 @@ We want to see if any of these variables are related. To do so, we will simply l
 The first one will be a scatterplot of Girth vs. Volume, which clearly shows a nice linear trend.
 
 ```{r}
-library(tidyverse)
 suppressPackageStartupMessages(library(tidyverse))
+library(tidyverse)
 
 trees %>% 
   ggplot(aes(Girth, Volume)) + 
