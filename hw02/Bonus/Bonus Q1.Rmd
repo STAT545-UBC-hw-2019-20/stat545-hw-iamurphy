@@ -1,1 +1,44 @@
+---
+title: "Bonus Question 1"
+author: "Ian Murphy"
+date: '2019-09-19'
+output: 
+  html_document:
+    pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Bonus Question 1
+
+Load Packages
+
+```{r load packages, warning = FALSE, message = FALSE}
+# load your packages here:
+library(gapminder)
+library(tidyverse)
+```
+
+We are given the following code:
+
+```{r}
+gapminder %>%
+  filter(country == c("Rwanda", "Afghanistan"))
+```
+
+
+And when we run it, we only get a subset of the data from Rwanda and Afghanistan. In order to do this properly, there are 2 different ways which could work. Firstly, we could replace the "==" with "%in%". This will produce the countries of either Rwanda or Afghanistan. Secondly, we could use the "|" operator. These 2 methods are demonstrated below.
+
+```{r}
+gapminder %>% 
+  filter(country %in% c("Rwanda", "Afghanistan"))
+
+gapminder %>% 
+  filter(country == "Rwanda" | country == "Afghanistan")
+```
+
+Either of these methods will produce the desired result. 
+
 
