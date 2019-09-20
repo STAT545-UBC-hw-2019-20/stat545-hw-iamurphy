@@ -1,0 +1,89 @@
+---
+title: "A2Q2"
+author: "Ian Murphy"
+date: '2019-09-19'
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Question 2
+
+Start by loading packages.
+
+```{r load packages, warning = FALSE, message = FALSE}
+# load your packages here:
+library(gapminder)
+library(tidyverse)
+```
+
+## Range of Values
+
+Our goal is to investigate a categorical variable and a quantitative variable. For this exercise, the categorical variable will be *continent* and the quantitative variable will be 
+
+```{r}
+gapminder %>% 
+  select(continent) %>% 
+  distinct(continent)
+```
+
+Looking at the output, we see that there are 5 distinct categories for continent: Asia, Europe, Africa, Americas, Oceania. This is the possible range.
+
+For our continuous variable, we will choose lifeExp, only from 2007. This will make the analysis more clear. 
+
+```{r}
+lifeExp2007 <- gapminder %>% 
+                 select(country, lifeExp, year) %>% 
+                 filter(year == 2007)
+
+lifeExp2007
+```
+
+Now, we can look at the range of possible values.
+
+```{r}
+lifeExp2007 %>% 
+  select(lifeExp) %>% 
+  range()
+
+```
+
+So, our range of possible values is 39.613 to 82.603.
+
+## Typical Values
+
+For the categorical variable, we can look at the distribution of the continents. To do so, it may just be nice to know the count for each continent, then present that in a graph:
+
+```{r}
+dist_cont <- gapminder %>% 
+  select(continent, country, year) %>% 
+  filter(year == 2007) %>% 
+  select(continent) %>% 
+  group_by(continent) %>% 
+  summarize(n()) %>% 
+  rename(counting = "n()")
+
+dist_cont
+  
+```
+
+Now that we have the distribution of continents, perhaps we can graph this as a bar chart to make it more apparent how they are distributed:
+
+```{r}
+dist_cont %>% 
+  ggplot(aes(continent, counting)) + 
+  geom_bar(stat="identity")
+```
+
+For the distribution of life expectancy, we can use a typical histogram since it is a continuous variable.
+
+```{r}
+lifeExp2007 %>% 
+  select(lifeExp) %>% 
+  ggplot(aes(lifeExp)) +
+  geom_histogram()
+```
+
+This shows a "bimodel" type of data. It's fairly uniform for below 60, then it turns somewhat normal afterwards. 
