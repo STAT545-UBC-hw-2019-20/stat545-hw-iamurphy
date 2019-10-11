@@ -125,7 +125,7 @@ ggsave(here("LifeExp.jpg"),
        plot=plot2)
 ```
 
-Now we will link it ![here.]("~/Desktop/STAT 545A/Assignment 05/LifeExp.jpg")
+Now we will link it ![here.]("/figure-html/LifeExp.jpg")
 
 
 
