@@ -171,7 +171,7 @@ ggsave(here("LifeExp.jpg"),
 
 ```
 
-Here is a link to see the ![plot](https://github.com/STAT545-UBC-hw-2019-20/stat545-hw-iamurphy/blob/master/hw05/figure-html/LifeExp.jpg). 
+Here is a link to see the ![plot](/figure-html/LifeExp.jpg). 
 
 
 
