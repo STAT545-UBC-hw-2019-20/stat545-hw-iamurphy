@@ -3,8 +3,7 @@ title: "Assignment 5"
 author: "Ian Murphy"
 date: '2019-10-10'
 output:
-  html_document:
-    df_print: paged
+  html_document
 ---
 
 ```{r setup, include=FALSE}
@@ -15,28 +14,59 @@ library(tidyverse)
 library(gapminder)
 library(here)
 library(gridExtra)
+library(DT)
+
 ```
-
-
-# Assignment 5
 
 ## Exercise 1
 The here::here package is extremely useful in R. There are many reasons for this. Firstly, the here package is incredibly robust. For example, it allows you to read and write between operating systems such as Mac, Windows, and Linnux. This is useful for when you are collaborating with people who are using different operating systems, and yet they still need to run your code on their own system. As such, it allows for robust file path naming conventions. Secondly, the here::here package is designed to be used with Rstudio Projects. If you are using here(), then it will find your root directory, then the location to the project. When it goes looking for a file, it can safely read and write form them. Moreover, if you're doing everything in your Rproj, then you can safely open and run files outside of the project using here(). This is due to the fact that the directory is based on the R Project file. This is just a brief example as to why using here() is a much better alternative to using a straightforward path or a relative path. 
-## Exercise 2
-For this question, we will be working with the gapminder data set. We will be dropping a factor or level, and then reordering them.
 
-Remove Oceania.
+## Exercise 2
+For this question, we will be working with the gapminder data set. We will be dropping a factor, and then reordering them.
+
+Remove Oceania:
 ```{r}
 original <- gapminder %>% 
   count(continent)
+
 filtered <- gapminder %>% 
   filter(continent != "Oceania") %>% 
-  select(country, continent) %>% 
-  count(continent)
+  select(country, continent, lifeExp) %>% 
+  droplevels()
 
-original
+filtered$continent %>% 
+  nlevels()
 filtered
+
 ```
+
+As we can see, we've filtered the datatable to remove Oceania. We also removed all unused levels, since nlevels() produces 4 instead of 5. Prior to filtering, we had 24 rows related to Oceania, which have all been removed.
+
+For the next step, we will reorder the levels of continent. In order to visualize this, we will first plot the data:
+
+```{r}
+filtered %>%
+  ggplot() +
+  geom_bar(aes(x=continent)) +
+  coord_flip() +
+  ylab("Number") + 
+  xlab("Continent")
+
+```
+
+Let's reorder this data. I will chose to reorder the continents by variance of the life expectancy. Thus, those with the largest variation in life expectancy will be ordered first, then the next largest, and so on. Then, I will plot it again so we can see the difference:
+
+```{r}
+filtered %>%
+  ggplot() +
+  geom_bar(aes(fct_reorder(continent, lifeExp, var))) +
+  coord_flip() +
+  ylab("Number") + 
+  xlab("Continent")
+
+```
+
+In our new graph, we can clearly see the reordering that has occurred. 
 
 ## Exercise 3
 In this section, we will be experimenting with File I/O. We will be working with the gapminder dataset again. We will select a handful of countries, then group by country, and calculate the mean life expectancy since 1952 to 2007. Then, we will write this to a file, then read it back in.
@@ -48,32 +78,38 @@ filt_gap <- gapminder %>%
   select(country, year, lifeExp) %>% 
   group_by(country) %>% 
   summarise(mean(lifeExp))
+
 ```
+
 Write to a file:
 
 ```{r}
 path <- here("filtered_gapminder.csv")
 write_csv(filt_gap, path)
+
 ```
 
 Reload the file back in:
+
 ```{r}
-gap <- read_csv("filtered_gapminder.csv")
+gap <- read_csv(here("filtered_gapminder.csv"))
 gap
+
 ```
 
-With this imported file, let's play around with the factor level "country" and reorder this data.
+With this imported file, which imported correctly, let's play around with the factor level "country" and reorder this data. I chose a manual way to relevel the data based on personal preference. 
 
 ```{r}
 gap %>%
-  ggplot(aes(fct_relevel(country, "Canada",
-                         "Germany", "France",
-                         "China"),
+  ggplot(aes(fct_relevel(country, 
+                         "Canada", "Germany", 
+                         "France", "China"), 
              `mean(lifeExp)`)) +
   geom_bar(stat="identity") +
   theme_bw() +
   coord_flip() +
-  xlab("Continent") + ylab("Number of entries") 
+  xlab("Continent") + ylab("Number") 
+
 ```
 
 We were lucky enough to have our file survive the round trip! 
@@ -82,6 +118,7 @@ We were lucky enough to have our file survive the round trip!
 In Assignment 2, I created a histogram of life expectancies from 2007. In this exercise, I will modify the graph to change the binwidth and change the colour so that red shows a high density, and green shows a low density. Also, I will superimpose a density curve on top of it.
 
 Here is my original plot:
+
 ```{r}
 lifeExp2007 <- gapminder %>%
   select(country, lifeExp, year) %>%
@@ -93,9 +130,11 @@ plot1 <- lifeExp2007 %>%
   ggplot(aes(lifeExp)) +
   geom_histogram(binwidth = 4)
 plot1
+
 ```
 
 Now, I will change it to add all the stuff I mentioned above. Here is the new plot:
+
 ```{r}
 plot2 <- lifeExp2007 %>%
   select(lifeExp) %>%
@@ -107,14 +146,17 @@ plot2 <- lifeExp2007 %>%
   xlab("Life Expectancy") +
   ggtitle("Density Plot of Life Expectancy")
 plot2
+
 ```
 
-
 Plotting these side-by-side, we can see a big improvement!
+
 ```{r}
 gridExtra::grid.arrange(plot1, plot2, ncol=2,
                         widths = c(2,3))
+
 ```
+
 Clearly, I've learned a lot about ggplot2, and I've been able to implement them in a useful way!
 
 ## Exercise 5
@@ -122,10 +164,14 @@ In this exercise, we will save the plot2 from above using the ggsave() function.
 
 ```{r}
 ggsave(here("LifeExp.jpg"),
-       plot=plot2)
+       plot=plot2,
+       width = 10,
+       height = 7,
+       units = "cm")
+
 ```
 
-Now we will link it ![here.]("/figure-html/LifeExp.jpg")
+Here is a link to see the plot: 
 
 
 
